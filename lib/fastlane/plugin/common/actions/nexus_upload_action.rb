@@ -2,44 +2,34 @@ require 'fastlane/action'
 
 module Fastlane
   module Actions
-    class NexusUploadAsZipAction < Action
+    class NexusUploadAction < Action
       def self.run(params)
+        artifact = params[:artifact]
         if params[:as_zip]
-          artifact_extension = File.extname(params[:artifact]).shellescape[1..-1]
-          outputFilePath = "#{params[:artifact]}.zip"
-          sh("zip -r #{outputFilePath} #{params[:artifact]}")
+          artifact_extension = File.extname(artifact).shellescape[1..-1]
+          outputFilePath = "#{artifact}.zip"
+          sh("zip -r #{outputFilePath} #{artifact}")
           classifier = params[:repo_classifier] ? "#{params[:repo_classifier]}-#{artifact_extension}" : artifact_extension
-
-          other_action.nexus_upload(
-            nexus_version: params[:nexus_version],
-            mount_path: params[:mount_path],
-            file: outputFilePath,
-            repo_id: params[:repo_id],
-            repo_group_id: params[:repo_group_id],
-            repo_project_name: params[:repo_group_id],
-            repo_project_version: params[:repo_project_version],
-            repo_classifier: classifier,
-            endpoint: params[:endpoint],
-            username: params[:username],
-            password: params[:password],
-            verbose: params[:verbose]
-          )
+          artifact = outputFilePath
         else
-          other_action.nexus_upload(
-            nexus_version: params[:nexus_version],
-            mount_path: params[:mount_path],
-            file: params[:artifact],
-            repo_id: params[:repo_id],
-            repo_group_id: params[:repo_group_id],
-            repo_project_name: params[:repo_project_name],
-            repo_project_version: params[:repo_project_version],
-            repo_classifier: params[:repo_classifier],
-            endpoint: params[:endpoint],
-            username: params[:username],
-            password: params[:password],
-            verbose: params[:verbose]
-          )
+          classifier = params[:repo_classifier]
         end
+
+        other_action.nexus_upload(
+          nexus_version: params[:nexus_version],
+          mount_path: params[:mount_path],
+          file: artifact,
+          repo_id: params[:repo_id],
+          repo_group_id: params[:repo_group_id],
+          repo_project_name: params[:repo_project_name]
+          repo_project_version: params[:repo_project_version],
+          repo_classifier: classifier,
+          endpoint: params[:endpoint],
+          username: params[:username],
+          password: params[:password],
+          verbose: params[:verbose]
+        )
+      end
       end
 
       def self.description
@@ -65,7 +55,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :as_zip,
                                        description: "Flag to indicate if artifact should be zipped before upload",
                                        optional: true,
-                                       is_string: false,
+                                       type: Boolean,
                                        default_value: false),
           FastlaneCore::ConfigItem.new(key: :nexus_version,
                                        description: "Nexus version",

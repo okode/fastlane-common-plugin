@@ -5,10 +5,6 @@ module Fastlane
   module Actions
     class SetAppEnvironmentAction < Action
       def self.run(options)
-        unless options[:env]
-          raise "Environment not provided"
-        end
-
         sh("jq '{ \"#{options[:env]}\": .#{options[:env]} }' #{options[:env_file_path]} > environments.tmp.json && mv environments.tmp.json #{options[:env_file_path]}")
       end
 
@@ -27,7 +23,7 @@ module Fastlane
                                        optional: false),
           FastlaneCore::ConfigItem.new(key: :env_file_path,
                                        description: "Path to the environment file",
-                                       optional: true)
+                                       optional: false)
         ]
       end
 

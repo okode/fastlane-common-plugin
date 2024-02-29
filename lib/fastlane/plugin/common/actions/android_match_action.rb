@@ -3,7 +3,7 @@ require 'fastlane_core'
 
 module Fastlane
   module Actions
-    class AndroidMatchKeystoreAction < Action
+    class AndroidMatchAction < Action
       def self.run(params)
         keystore = params[:keystore]
         type = params[:type]
@@ -18,7 +18,7 @@ module Fastlane
 
         raise "Missing keystore #{keystore}." unless keystore
 
-        return if !params[:force] && File.exist?(keystore)
+        raise  "The keystore already exists. If you want to redownload it, please run with the --force flag." if !params[:force] && File.exist?(keystore)
 
         temp_dir = Dir.mktmpdir
         git_url = ENV['ANDROID_MATCH_URL']
