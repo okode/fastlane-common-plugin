@@ -55,7 +55,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :as_zip,
                                        description: "Flag to indicate if artifact should be zipped before upload",
                                        optional: true,
-                                       type: Boolean,
+                                       is_string: false,
                                        default_value: false),
           FastlaneCore::ConfigItem.new(key: :nexus_version,
                                        description: "Nexus version",
