@@ -21,7 +21,7 @@ module Fastlane
           file: artifact,
           repo_id: params[:repo_id],
           repo_group_id: params[:repo_group_id],
-          repo_project_name: params[:repo_project_name]
+          repo_project_name: params[:repo_project_name],
           repo_project_version: params[:repo_project_version],
           repo_classifier: classifier,
           endpoint: params[:endpoint],
@@ -29,7 +29,6 @@ module Fastlane
           password: params[:password],
           verbose: params[:verbose]
         )
-      end
       end
 
       def self.description
