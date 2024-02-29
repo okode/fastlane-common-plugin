@@ -4,8 +4,6 @@ require 'fastlane_core'
 module Fastlane
   module Actions
     class AndroidMatchAction < Action
-      VALID_TYPES = [:debug, :release]
-
       def self.run(params)
         keystore = params[:keystore]
         type = params[:type]
@@ -20,7 +18,7 @@ module Fastlane
 
         raise 'Missing keystore #{keystore}.' unless keystore
 
-        raise  'The keystore already exists. If you want to redownload it, please run with the --force flag.' if !params[:force] && File.exist?(keystore)
+        raise 'The keystore already exists. If you want to redownload it, please run with the --force flag.' if !params[:force] && File.exist?(keystore)
 
         temp_dir = Dir.mktmpdir
         git_url = ENV['ANDROID_MATCH_URL']
@@ -47,12 +45,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(key: :type,
                                        description: "Type (debug/release)",
                                        optional: true,
-                                       default_value: "debug",
-                                       verify_block: proc do |value|
-                                         unless VALID_TYPES.include?(value.to_sym)
-                                           UI.user_error!("Invalid value '#{value}' for :type. Valid values are #{VALID_TYPES.join(', ')}")
-                                         end
-                                       end)
+                                       default_value: "debug"),
           FastlaneCore::ConfigItem.new(key: :force,
                                        description: "Force clone",
                                        optional: true,
