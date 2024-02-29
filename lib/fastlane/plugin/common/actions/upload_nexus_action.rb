@@ -2,7 +2,7 @@ require 'fastlane/action'
 
 module Fastlane
   module Actions
-    class NexusUploadAction < Action
+    class UploadNexusAction < Action
       def self.run(params)
         artifact = params[:artifact]
         if params[:as_zip]

@@ -41,10 +41,10 @@ module Fastlane
         [
           FastlaneCore::ConfigItem.new(key: :keystore,
                                        description: "Keystore",
-                                       optional: true),
+                                       optional: false),
           FastlaneCore::ConfigItem.new(key: :type,
                                        description: "Type (debug/release)",
-                                       optional: true,
+                                       optional: false,
                                        default_value: "debug"),
           FastlaneCore::ConfigItem.new(key: :force,
                                        description: "Force clone",
