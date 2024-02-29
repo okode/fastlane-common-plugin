@@ -36,7 +36,7 @@ module Fastlane
                                        optional: false),
           FastlaneCore::ConfigItem.new(key: :new_artifact_name,
                                        description: "New artifact name",
-                                       optional: true),
+                                       optional: true)
         ]
       end
 

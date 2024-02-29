@@ -13,12 +13,12 @@ module Fastlane
         elsif type == 'release'
           keystore = ENV['ANDROID_MATCH_RELEASE_KEYSTORE']
         elsif type
-          raise "Invalid type #{type}. Valid values: debug|release."
+          raise 'Invalid type #{type}. Valid values: debug|release.'
         end
 
-        raise "Missing keystore #{keystore}." unless keystore
+        raise 'Missing keystore #{keystore}.' unless keystore
 
-        raise  "The keystore already exists. If you want to redownload it, please run with the --force flag." if !params[:force] && File.exist?(keystore)
+        raise  'The keystore already exists. If you want to redownload it, please run with the --force flag.' if !params[:force] && File.exist?(keystore)
 
         temp_dir = Dir.mktmpdir
         git_url = ENV['ANDROID_MATCH_URL']
