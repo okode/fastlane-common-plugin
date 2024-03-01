@@ -10,7 +10,7 @@ module Fastlane
 
         if new_artifact_name
           artifact_extension = File.extname(artifact_path).shellescape
-          new_artifact_name_with_extension = "#{options[:new_artifact_name]}#{artifact_extension}"
+          new_artifact_name_with_extension = "#{params[:new_artifact_name]}#{artifact_extension}"
           sh("mkdir -p #{target_path}")
           sh("cp \"#{artifact_path}\" \"#{target_path}/#{new_artifact_name_with_extension}\"")
         else
