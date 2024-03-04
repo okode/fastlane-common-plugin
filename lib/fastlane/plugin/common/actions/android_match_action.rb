@@ -25,7 +25,7 @@ module Fastlane
         git_branch = ENV.fetch('ANDROID_MATCH_BRANCH', nil)
 
         sh("git clone --branch #{git_branch} #{git_url} #{temp_dir}")
-        FileUtils.cp("#{temp_dir}/#{keystore}", '../../')
+        FileUtils.cp("#{temp_dir}/#{keystore}", '/')
         FileUtils.rm_rf(temp_dir)
       end
 
