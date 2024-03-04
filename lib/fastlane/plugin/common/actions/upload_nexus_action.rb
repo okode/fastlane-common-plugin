@@ -50,7 +50,7 @@ module Fastlane
                                        optional: false),
           FastlaneCore::ConfigItem.new(key: :repo_classifier,
                                        description: "Repo classifier for the artifact",
-                                       optional: false),
+                                       optional: true),
           FastlaneCore::ConfigItem.new(key: :as_zip,
                                        description: "Flag to indicate if artifact should be zipped before upload",
                                        optional: false,
