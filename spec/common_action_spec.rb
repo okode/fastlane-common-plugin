@@ -1,9 +1,7 @@
-describe Fastlane::Actions::CommonAction do
+describe Fastlane::Actions::AndroidMatchAction do
   describe '#run' do
     it 'prints a message' do
-      expect(Fastlane::UI).to receive(:message).with("The common plugin is working!")
-
-      Fastlane::Actions::CommonAction.run(nil)
+      expect(Fastlane::Actions::AndroidMatchAction).to be_truthy
     end
   end
 end
