@@ -44,6 +44,8 @@ Metrics/ModuleLength:
   Enabled: false
 Naming/VariableNumber:
   Enabled: false
+Style/VariableName:
+  Enabled: false
 Style/MissingRespondToMissing:
   Enabled: false
 Style/MultilineBlockChain:

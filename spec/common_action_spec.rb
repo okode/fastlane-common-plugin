@@ -1,6 +1,6 @@
 describe Fastlane::Actions::AndroidMatchAction do
   describe '#run' do
-    it 'prints a message' do
+    it 'Android Match action exists' do
       expect(Fastlane::Actions::AndroidMatchAction).to be_truthy
     end
   end

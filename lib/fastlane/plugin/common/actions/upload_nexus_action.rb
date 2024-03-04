@@ -1,4 +1,5 @@
 require 'fastlane/action'
+require 'fastlane_core'
 
 module Fastlane
   module Actions
