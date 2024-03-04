@@ -8,10 +8,10 @@ module Fastlane
         artifact = params[:artifact]
         if params[:as_zip]
           artifact_extension = File.extname(artifact).shellescape[1..-1]
-          outputFilePath = "#{artifact}.zip"
-          sh("zip -r #{outputFilePath} #{artifact}")
+          output_file_path = "#{artifact}.zip"
+          sh("zip -r #{output_file_path} #{artifact}")
           classifier = params[:repo_classifier] ? "#{params[:repo_classifier]}-#{artifact_extension}" : artifact_extension
-          artifact = outputFilePath
+          artifact = output_file_path
         else
           classifier = params[:repo_classifier]
         end
