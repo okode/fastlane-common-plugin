@@ -3,7 +3,7 @@ require:
 - rubocop/require_tools
 - rubocop-performance
 AllCops:
-  TargetRubyVersion: 3.1.4
+  TargetRubyVersion: 2.6
   NewCops: enable
   Include:
   - "**/*.rb"
@@ -53,6 +53,8 @@ Style/NumericLiteralPrefix:
 Style/TernaryParentheses:
   Enabled: false
 Style/EmptyMethod:
+  Enabled: false
+Style/HashSyntax:
   Enabled: false
 Lint/UselessAssignment:
   Exclude:
