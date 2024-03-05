@@ -54,6 +54,8 @@ Style/TernaryParentheses:
   Enabled: false
 Style/EmptyMethod:
   Enabled: false
+Style/HashSyntax:
+  Enabled: false
 Lint/UselessAssignment:
   Exclude:
   - "**/spec/**/*"
