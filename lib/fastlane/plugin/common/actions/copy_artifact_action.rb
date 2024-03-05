@@ -15,7 +15,7 @@ module Fastlane
           sh("mkdir -p #{target_path}")
           sh("cp \"#{artifact_path}\" \"#{target_path}/#{new_artifact_name_with_extension}\"")
         else
-          other_action.copy_artifacts(target_path: target_path, artifacts: [artifact_path])
+          other_action.copy_artifacts(target_path:, artifacts: [artifact_path])
         end
       end
 
