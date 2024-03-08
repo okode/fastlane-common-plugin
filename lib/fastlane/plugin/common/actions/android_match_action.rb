@@ -1,28 +1,25 @@
-require 'fastlane/action'
-require 'fastlane_core'
-
 module Fastlane
   module Actions
     class AndroidMatchAction < Action
       def self.run(params)
-        keystore = params[:keystore]
         type = params[:type]
+        keystore = params[:keystore]
 
         if type == 'debug'
-          keystore = ENV.fetch('ANDROID_MATCH_DEBUG_KEYSTORE', nil)
+          keystore ||= ENV['ANDROID_MATCH_DEBUG_KEYSTORE']
         elsif type == 'release'
-          keystore = ENV.fetch('ANDROID_MATCH_RELEASE_KEYSTORE', nil)
-        elsif type
-          raise "Invalid type #{type}. Valid values: debug|release."
+          keystore ||= ENV['ANDROID_MATCH_RELEASE_KEYSTORE']
+        else
+          raise "Invalid type '#{type}'. Valid values: debug|release."
         end
 
-        raise "Missing keystore #{keystore}." unless keystore
+        raise "Missing keystore for type '#{type}'." unless keystore
 
-        raise 'The keystore already exists. If you want to redownload it, please run with the --force flag.' if !params[:force] && File.exist?(keystore)
+        raise "The keystore '#{keystore}' already exists. If you want to redownload it, please run with the --force flag." unless params[:force] || !File.exist?(keystore)
 
         temp_dir = Dir.mktmpdir
-        git_url = ENV.fetch('ANDROID_MATCH_URL', nil)
-        git_branch = ENV.fetch('ANDROID_MATCH_BRANCH', nil)
+        git_url = ENV['ANDROID_MATCH_URL']
+        git_branch = ENV['ANDROID_MATCH_BRANCH']
 
         sh("git clone --branch #{git_branch} #{git_url} #{temp_dir}")
         FileUtils.cp("#{temp_dir}/#{keystore}", '.')
