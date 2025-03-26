@@ -35,7 +35,8 @@ module Fastlane
         rescue FastlaneCore::Interface::FastlaneShellError => e
           UI.error("Command failed: #{command.join(' ')}")
           UI.error("Error message: #{e.message}")
-          UI.error("Backtrace: #{e.backtrace.join("\n")}")
+          output = `#{command.join(' ')} 2>&1`
+          UI.error("Command output: #{output}")
           raise e
         end
       end
