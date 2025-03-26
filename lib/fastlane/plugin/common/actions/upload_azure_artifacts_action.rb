@@ -1,5 +1,6 @@
 require 'fastlane/action'
 require 'fastlane_core'
+require 'fastlane_core/ui/ui'
 
 module Fastlane
   module Actions
@@ -29,7 +30,14 @@ module Fastlane
           "--project #{project.shellescape}"
         ]
 
-        Fastlane::Actions.sh(command.join(' '), log: params[:verbose])
+        begin
+          Fastlane::Actions.sh(command.join(' '), log: params[:verbose])
+        rescue FastlaneCore::Interface::FastlaneShellError => e
+          UI.error("Command failed: #{command.join(' ')}")
+          UI.error("Error message: #{e.message}")
+          UI.error("Backtrace: #{e.backtrace.join("\n")}")
+          raise e
+        end
       end
 
       def self.description
