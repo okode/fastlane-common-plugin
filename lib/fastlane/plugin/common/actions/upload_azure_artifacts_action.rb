@@ -27,7 +27,8 @@ module Fastlane
           "--version #{params[:version].shellescape}",
           "--path #{path.shellescape}",
           "--description #{description.shellescape}",
-          "--project #{project.shellescape}"
+          "--project #{project.shellescape}",
+          "--debug"
         ]
 
         begin
