@@ -18,7 +18,7 @@ module Fastlane
         project = params[:project] || 'devopsmapfre'
         description = params[:description] || params[:name]
 
-        if params[:az_artifacts_pw]
+        if params[:az_artifacts_pw] && !params[:az_artifacts_pw].strip.empty?
           sh("echo #{params[:az_artifacts_pw].shellescape} | az devops login --organization #{organization.shellescape}")
         end
 
