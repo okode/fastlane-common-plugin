@@ -18,6 +18,10 @@ module Fastlane
         project = params[:project] || 'devopsmapfre'
         description = params[:description] || params[:name]
 
+        if params[:az_artifacts_pw]
+          sh("az devops login --organization #{organization.shellescape} --token #{params[:az_artifacts_pw].shellescape}")
+        end
+
         command = [
           "az artifacts universal publish",
           "--organization #{organization.shellescape}",
@@ -27,9 +31,10 @@ module Fastlane
           "--version #{params[:version].shellescape}",
           "--path #{path.shellescape}",
           "--description #{description.shellescape}",
-          "--project #{project.shellescape}",
-          "--debug"
+          "--project #{project.shellescape}"
         ]
+
+        command << "--debug" if params[:debug]
 
         begin
           Fastlane::Actions.sh(command.join(' '), log: params[:verbose])
@@ -79,6 +84,15 @@ module Fastlane
                                        optional: true),
           FastlaneCore::ConfigItem.new(key: :as_zip,
                                        description: "Flag to indicate if artifact should be zipped before upload",
+                                       optional: true,
+                                       is_string: false,
+                                       default_value: false),
+          FastlaneCore::ConfigItem.new(key: :az_artifacts_pw,
+                                       description: "Personal Access Token (PAT) for Azure DevOps authentication",
+                                       optional: true,
+                                       is_string: true),
+          FastlaneCore::ConfigItem.new(key: :debug,
+                                       description: "Enable debug mode for the Azure CLI command",
                                        optional: true,
                                        is_string: false,
                                        default_value: false),
