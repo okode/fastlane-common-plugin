@@ -19,7 +19,7 @@ module Fastlane
         description = params[:description] || params[:name]
 
         if params[:az_artifacts_pw]
-          sh("az devops login --organization #{organization.shellescape} --token #{params[:az_artifacts_pw].shellescape}")
+          sh("echo #{params[:az_artifacts_pw].shellescape} | az devops login --organization #{organization.shellescape}")
         end
 
         command = [
