@@ -1,5 +1,6 @@
 require 'fastlane/action'
 require 'fastlane_core'
+require 'base64'
 
 module Fastlane
   module Actions
@@ -24,6 +25,14 @@ module Fastlane
         git_url = ENV.fetch('ANDROID_MATCH_URL', nil)
         git_branch = ENV.fetch('ANDROID_MATCH_BRANCH', nil)
 
+        # Optional: Add basic auth if ANDROID_MATCH_BASIC_AUTHORIZATION is set
+        if ENV['ANDROID_MATCH_BASIC_AUTHORIZATION']
+          decoded_auth = Base64.decode64(ENV['ANDROID_MATCH_BASIC_AUTHORIZATION']).strip
+          uri = URI.parse(git_url)
+          uri.userinfo = decoded_auth
+          git_url = uri.to_s
+        end
+      
         sh("git clone --branch #{git_branch} #{git_url} #{temp_dir}")
         FileUtils.cp("#{temp_dir}/#{keystore}", '.')
         FileUtils.rm_rf(temp_dir)
