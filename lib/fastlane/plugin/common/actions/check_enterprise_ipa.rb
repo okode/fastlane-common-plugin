@@ -11,7 +11,7 @@ module Fastlane
 
         Actions::CheckIpaExpirationAction.run(
           ipa_path: ipa_path,
-          expiration_threshold_days: expiration_threshold_days
+          threshold_days: expiration_threshold_days
         )
       end
 
