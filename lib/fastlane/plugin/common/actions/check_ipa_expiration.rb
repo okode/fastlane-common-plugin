@@ -12,7 +12,7 @@ module Fastlane
         UI.user_error!("You must provide a valid value for 'threshold_days'") unless params[:threshold_days]
 
         ipa_path = params[:ipa_path]
-        threshold_days = params[:threshold_days].to_i
+        threshold_days = params[:threshold_days]
     
         UI.user_error!("You must provide a valid .ipa path") unless ipa_path && File.exist?(ipa_path)
     
@@ -56,7 +56,8 @@ module Fastlane
                                        optional: false),
           FastlaneCore::ConfigItem.new(key: :threshold_days,
                                        description: "Number of days before expiration to trigger failure",
-                                       optional: false)
+                                       optional: false,
+                                       type: Integer)
         ]
       end
 
