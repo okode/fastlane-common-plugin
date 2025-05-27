@@ -28,7 +28,7 @@ module Fastlane
           FastlaneCore::ConfigItem.new(
             key: :expiration_threshold_days,
             description: "Number of days before expiration to trigger failure",
-            default_value: 120,
+            default_value: 300,
             type: Integer
           )
         ]
