@@ -122,6 +122,8 @@ Layout/LineLength:
   Max: 370
 Metrics/ParameterLists:
   Max: 17
+Metrics/PerceivedComplexity:
+  Enabled: false
 Style/GuardClause:
   Enabled: false
 Style/StringLiterals:
